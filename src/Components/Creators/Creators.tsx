@@ -1,72 +1,135 @@
-// src/components/Creators.tsx
-import { motion } from "framer-motion";
+import { FaInstagram, FaYoutube } from "react-icons/fa";
 
-interface Creator {
+type Creator = {
   name: string;
-  handle: string;
-  profile: string; // profile image URL
-  link: string; // Instagram link
-}
+  instagram?: string;
+  youtube?: string;
+  image?: string;
+  followers: string; // followers/subscribers count
+};
 
 const creators: Creator[] = [
   {
-    name: "Ishan",
-    handle: "@ishan",
-    profile: "/creators/ishan.jpg",
-    link: "https://instagram.com/ishan",
+    name: "Ishan Sharma",
+    instagram: "https://www.instagram.com/ishansharma7390/",
+    image: "/creators/ishan.jpg",
+    followers: "1M followers",
   },
   {
-    name: "Kashish IG",
-    handle: "@kashish",
-    profile: "/creators/kashish.jpg",
-    link: "https://instagram.com/kashish",
+    name: "Kashish",
+    instagram: "https://www.instagram.com/aapki_kashishhh/",
+    image: "/creators/kashish.jpg",
+    followers: "502K followers",
   },
   {
-    name: "Kushagra Tayal",
-    handle: "@kushagra",
-    profile: "/creators/kushagra.jpg",
-    link: "https://instagram.com/kushagra",
+    name: "Saumya Singh",
+    instagram: "https://www.instagram.com/saumya1singh/",
+    followers: "483K followers",
   },
-  // 👉 Add the rest of the creators here
+  {
+    name: "Shreyansh Goyal",
+    youtube: "https://www.youtube.com/@ShreyanshGoyal/featured",
+    followers: "181K subscribers",
+  },
+  {
+    name: "Siddharth",
+    youtube: "https://www.youtube.com/@itssiddharthsingh",
+    followers: "216K subscribers",
+  },
+  {
+    name: "Harman Singh",
+    instagram: "https://www.instagram.com/hustlewithharman/",
+    followers: "888K followers",
+  },
+  {
+    name: "Arsh Goyal",
+    instagram: "https://www.instagram.com/arshgoyalyt/",
+    followers: "481K followers",
+  },
+  {
+    name: "Deepanshu Raj",
+    instagram: "https://www.instagram.com/iqlipse_nova/",
+    followers: "892K followers",
+  },
+  {
+    name: "Striver",
+    youtube: "https://www.youtube.com/@striver_79",
+    followers: "305k subscribers",
+  },
+  {
+    name: "Dr. Sid Warrier",
+    instagram: "https://www.instagram.com/thesidwarrier/",
+    followers: "287K followers",
+  },
 ];
 
-const Creators = () => {
+const CreatorsSection = () => {
   return (
-    <section className="bg-bg py-16 text-center text-textMain">
-      <h2 className="text-2xl md:text-4xl font-heading font-bold mb-12">
-        Worked with Creators
+    <section className="bg-[#0e0f1b] text-white py-20 px-6 sm:px-12 md:px-20">
+      <h2 className="text-4xl sm:text-5xl font-bold font-oswald text-center mb-14">
+        Creators We’ve Worked With
       </h2>
 
-      {/* Grid of Creator Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 px-6">
-        {creators.map((creator, idx) => (
-          <motion.a
-            href={creator.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            key={idx}
-            className="flex flex-col items-center bg-white/10 rounded-xl p-4 shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
-            whileHover={{ scale: 1.05 }}
-          >
-            <img
-              src={creator.profile}
-              alt={creator.name}
-              className="w-24 h-24 rounded-full object-cover border-2 border-primary mb-4"
-            />
-            <h3 className="text-lg font-semibold">{creator.name}</h3>
-            <p className="text-sm text-textMuted flex items-center gap-1">
-              <img
-                src="/icons/instagram.svg"
-                alt="Instagram"
-                className="w-4 h-4"
-              />
-              {creator.handle}
-            </p>
-          </motion.a>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {creators.map((creator, idx) => {
+          const socialLink = creator.instagram || creator.youtube || "";
+          const isInstagram = Boolean(creator.instagram);
+
+          return (
+            <div
+              key={idx}
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col items-center shadow-lg hover:shadow-orange-500/20 transition-transform duration-300 hover:-translate-y-2"
+            >
+              {/* Profile Image */}
+              <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/20 mb-4">
+                {creator.image ? (
+                  <img
+                    src={creator.image}
+                    alt={creator.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-700 text-gray-300 text-xl">
+                    {creator.name.charAt(0)}
+                  </div>
+                )}
+              </div>
+
+              {/* Name */}
+              <h3 className="text-lg font-semibold text-center font-inter">
+                {creator.name}
+              </h3>
+
+              {/* Social Icon */}
+              {socialLink && (
+                <a
+                  href={socialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`mt-3 p-2 rounded-full hover:scale-110 transition-transform ${
+                    isInstagram
+                      ? "bg-gradient-to-tr from-pink-500 to-yellow-400"
+                      : "bg-red-600"
+                  }`}
+                >
+                  {isInstagram ? (
+                    <FaInstagram className="text-white text-lg" />
+                  ) : (
+                    <FaYoutube className="text-white text-lg" />
+                  )}
+                </a>
+              )}
+
+              {/* Followers */}
+              <p className="mt-4 text-sm text-gray-300 font-inter">
+                {creator.followers}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 };
 
-export default Creators;
+export default CreatorsSection;

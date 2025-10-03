@@ -15,35 +15,35 @@ const testimonials: Testimonial[] = [
     name: "Aarushi",
     role: "Founder, SocialSphere",
     review:
-      "Working with this team has transformed our brand. Their videos boosted our visibility by 300%.",
+      "They always delivered on time and were always up for last minute changes. Really good ctr.",
   },
   {
     video: "/videos/Raj.mp4",
     name: "Raj",
     role: "Marketing Head, FinEdge",
     review:
-      "Professional, reliable, and insanely creative. Highly recommended!",
+      "They takes the ownership. I would call him around 2 Am and will tell him that we need it live within next 12 hours and he delivers it!.",
   },
   {
     video: "/videos/Saumya.mov",
     name: "Saumya",
     role: "Content Strategist, BrandNest",
     review:
-      "From editing to storytelling, everything was flawless. Our audience loves the content!",
+      "-Very satisfied and impress by his work, very talented and hardworking guy! He takes the reliability!",
   },
   {
     video: "/videos/Shreyansh.mp4",
     name: "Shreyansh",
     role: "CEO, MarketMinds",
     review:
-      "They not only deliver videos but also real results. Our lead generation doubled.",
+      "I started working with him when I had somewhat 2k subscribers and with him I've scaled to 150k subscribers.",
   },
   {
-    video: "/videos/VidhiKarla.mp4",
+    video: "/videos/VidhiKalra.mp4",
     name: "Vidhi Karla",
     role: "Entrepreneur",
     review:
-      "The best investment I’ve made in my brand. Their team truly understands content strategy.",
+      "He is really good with editing and apart from that he also helped me grow my channel 10x.",
   },
 ];
 
@@ -54,7 +54,7 @@ const Testimonials = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 

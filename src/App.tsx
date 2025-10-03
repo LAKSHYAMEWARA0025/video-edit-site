@@ -1,5 +1,5 @@
 import Body from "./Components/Body/body"
-import Body2 from "./Components/Body2/body2"
+import Questions from "./Components/Body2/questions"
 import Creators from "./Components/Creators/Creators"
 import Footer from "./Components/Footer/footer"
 import Header from "./Components/Header/header"
@@ -22,7 +22,7 @@ function App() {
       <OwnerInfo/>
       <Creators/>
       <Testimonials/>
-      <Body2/>
+      <Questions/>
       <Footer/>
     </>
   )
