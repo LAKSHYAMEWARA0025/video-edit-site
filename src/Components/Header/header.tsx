@@ -10,11 +10,11 @@ const Header = () => {
           {/* Logo + Site Name */}
           <div className="flex items-center space-x-2">
             <img
-              src="/logo-placeholder.svg" // Replace this with your actual logo
+              src="/logo/Whitelogo.png" // Replace this with your actual logo
               alt="Logo"
-              className="w-8 h-8"
+              className="w-20 h-25"
             />
-            <span className="text-xl font-bold text-primary">VideoEditPro</span>
+            <span className="text-xl font-bold text-primary">TheFinalCut</span>
           </div>
 
           {/* Center Links (Hidden on Mobile) */}

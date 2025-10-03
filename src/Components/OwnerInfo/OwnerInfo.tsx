@@ -67,11 +67,11 @@ const OwnerInfo: React.FC = () => {
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <img
-            src="/images/owner.jpg" // replace with your actual owner photo
+            src="/owner/owner.jpg" // replace with your actual owner photo
             alt="Owner"
             className="w-32 h-32 rounded-full object-cover border-4 border-primary shadow-lg"
           />
-          <h3 className="text-xl sm:text-2xl font-semibold">Lakshya Mewara</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold">Vijay Chaudhary</h3>
           <a
             href="https://instagram.com/yourusername"
             target="_blank"

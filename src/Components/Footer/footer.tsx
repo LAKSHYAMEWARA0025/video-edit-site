@@ -1,5 +1,5 @@
 // import React from 'react';
-import { FaYoutube, FaInstagram, FaLinkedin } from 'react-icons/fa6';
+import { FaYoutube, FaInstagram, FaLinkedin, FaThreads } from 'react-icons/fa6';
 
 const Footer = () => {
   return (
@@ -42,8 +42,8 @@ const Footer = () => {
 
         {/* Left: Logo + Name */}
         <div className="flex items-center gap-4">
-          <img src="/logo.svg" alt="Logo" className="w-14 h-14" />
-          <span className="font-oswald text-2xl font-bold tracking-wide">Cinematic Studio</span>
+          <img src="/logo/Whitelogo.png" alt="Logo" className="w-20 h-20" />
+          <span className="font-oswald text-2xl font-bold tracking-wide">The Final Cut</span>
         </div>
 
         {/* Golden line divider on small screens */}
@@ -53,20 +53,20 @@ const Footer = () => {
         <div className="text-center md:text-right">
           <h4 className="text-lg font-semibold text-yellow-400 mb-2 font-inter uppercase tracking-wide">Contact</h4>
           <p className="text-base text-gray-300 mb-2 font-inter">
-            📩 <a href="mailto:connect@cinematicstudio.com" className="hover:underline">connect@cinematicstudio.com</a>
+            📩 <a href="mailto:connect@cinematicstudio.com" className="hover:underline"> vijay9828choudhary@gmail.com</a>
           </p>
           <div className="flex gap-6 justify-center md:justify-end text-2xl mt-1 text-white">
-            <a href="#" className="hover:text-red-500 transition-colors"><FaYoutube /></a>
-            <a href="#" className="hover:text-pink-500 transition-colors"><FaInstagram /></a>
-            <a href="#" className="hover:text-blue-400 transition-colors"><FaLinkedin /></a>
-            {/*<a href="#" className="hover:text-white transition-colors"><FaThreads /></a> */}
+            <a href="https://www.youtube.com/@itsvijaychoudhary/featured" className="hover:text-red-500 transition-colors"><FaYoutube /></a>
+            <a href="https://www.instagram.com/itsvijaychoudhary/" className="hover:text-pink-500 transition-colors"><FaInstagram /></a>
+            <a href="https://www.linkedin.com/in/itsvijaychoudhary/" className="hover:text-blue-400 transition-colors"><FaLinkedin /></a>
+            <a href="https://x.com/_vijaychoudhary" className="hover:text-white transition-colors"><FaThreads /></a>
           </div>
         </div>
       </div>
 
       {/* Copyright */}
       <div className="relative z-10 mt-12 text-center text-sm text-gray-500 font-inter">
-        © {new Date().getFullYear()} Cinematic Studio. All rights reserved.
+        © {new Date().getFullYear()} The Final Cut. All rights reserved.
       </div>
     </section>
   );

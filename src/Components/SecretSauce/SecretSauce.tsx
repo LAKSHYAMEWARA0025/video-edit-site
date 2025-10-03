@@ -12,19 +12,19 @@ const steps: Step[] = [
     title: "Brand Ideation and Strategy",
     text:
       "In a single powerful session, we’ll map your entire content ecosystem—shaping your unique angle, refining your style, designing impactful hooks, and building a strategy that adds the wow factor. Within a week, you’ll have a clear 1–3 month brand strategy ready. By week two, your brand assets will be finalized and content production will be underway.",
-    img: "/images/brand-strategy.jpg",
+    img: "/SecretSauce/BrandIdeation.jpg",
   },
   {
     title: "Filming and Editing",
     text:
       "Once we receive all the raw files, we’ll kick off the editing process. Throughout the shoot, we’ll guide and support you at every step. After editing, we’ll create the copies to go along with the content—and just like that, your content will be ready to go live.",
-    img: "/images/filming.jpg",
+    img: "/SecretSauce/FilmingEditing.jpg",
   },
   {
     title: "Watch your brand scale",
     text:
       "Once your content goes live, it will become a massive support system for your business. Think of it like the iceberg beneath the surface—driving leads and sales that aren’t immediately visible. Beyond that, whether it’s hiring, sharing your ideas, closing high-ticket clients, or generating inbound leads—everything flows through one powerful engine: your personal brand.",
-    img: "/images/brand-scale.jpg",
+    img: "/SecretSauce/WatchYourBrandScale.jpg",
   },
 ];
 
@@ -69,13 +69,20 @@ const SecretSauce: React.FC = () => {
               variants={cardVariants}
             >
               {/* Image */}
-              <div className="w-full md:w-1/2">
+              {/* <div className="w-full md:w-1/2">
                 <img
                   src={step.img}
                   alt={step.title}
                   className="w-full h-64 sm:h-80 object-cover rounded-xl shadow-lg"
                 />
-              </div>
+              </div> */}
+              <div className="w-full h-64 sm:h-80 flex justify-center items-center">
+    <img
+      src={step.img}
+      alt={step.title}
+      className="max-h-full max-w-full object-contain rounded-xl shadow-lg"
+    />
+  </div>
 
               {/* Text */}
               <div className="w-full md:w-1/2 space-y-4">
