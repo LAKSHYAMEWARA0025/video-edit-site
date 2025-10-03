@@ -6,6 +6,7 @@ import Header from "./Components/Header/header"
 import Hero from "./Components/Hero/hero"
 import OwnerInfo from "./Components/OwnerInfo/OwnerInfo"
 import SecretSauce from "./Components/SecretSauce/SecretSauce"
+import Testimonials from "./Components/Testimonials/Testimonials"
 import TrustedBy from "./Components/TrustedBy/trustedBy"
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Body/>
       <OwnerInfo/>
       <Creators/>
+      <Testimonials/>
       <Body2/>
       <Footer/>
     </>
