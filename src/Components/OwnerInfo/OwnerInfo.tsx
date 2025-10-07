@@ -1,29 +1,39 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaInstagram } from "react-icons/fa";
+// FIX: Using the direct path for the Fa Instagram icon to fix the resolution error
+import { FaYoutube} from "react-icons/fa";
 
 const OwnerInfo: React.FC = () => {
+  const OWNER_Youtube = "https://www.youtube.com/@itsvijaychoudhary/featured";
+  const OWNER_USERNAME = "@itsvijaychoudhary";
+  const OWNER_NAME = "Vijay Chaudhary";
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary/20 via-bg to-accent/20 py-20 px-6">
-      {/* Animated background gradient blobs */}
+    // Background is full black, matching the site theme
+    <section id="about" className="relative overflow-hidden bg-[#000000] py-20 px-6 sm:px-8">
+      
+      {/* Animated background gradient blobs (Subtle movement in theme colors) */}
       <motion.div
-        className="absolute top-0 left-0 w-72 h-72 bg-primary/30 rounded-full blur-3xl"
-        animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[-100px] left-[-100px] w-96 h-96 bg-[#2196F3]/20 rounded-full blur-3xl opacity-30"
+        animate={{ x: [0, 200, 0], y: [0, 150, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
-        animate={{ x: [0, -100, 0], y: [0, -50, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-[-100px] right-[-100px] w-80 h-80 bg-[#1A1A1A]/50 rounded-full blur-3xl opacity-30"
+        animate={{ x: [0, -200, 0], y: [0, -100, 0] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center text-textMain">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-8">
-          We Did it, <span className="text-primary">You can too</span>
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
+        
+        {/* Title */}
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-12 drop-shadow-md">
+          We Did it, <span className="text-[#2196F3]">You can too</span>
         </h2>
 
-        <div className="space-y-6 text-base sm:text-lg leading-relaxed font-primary text-textMuted">
+        {/* Text Content */}
+        <div className="space-y-6 text-base sm:text-lg leading-relaxed text-gray-300 font-light px-2">
           <p>
             Today, most early-stage businesses can be built using AI. But what
             they often lack is distribution—something AI alone cannot solve.
@@ -44,7 +54,7 @@ const OwnerInfo: React.FC = () => {
           <p>
             After spending years creating content that resonates with millions,
             I've realized one thing:{" "}
-            <span className="text-primary font-semibold">
+            <span className="text-[#2196F3] font-semibold tracking-wide">
               attention is the new currency.
             </span>
           </p>
@@ -53,34 +63,42 @@ const OwnerInfo: React.FC = () => {
             help brands stand out through powerful storytelling and content
             strategy.
           </p>
-          <p className="italic text-accent font-medium">
+          <p className="italic text-[#2196F3] font-medium mt-8">
             Every scroll, every click, every view Matters!!
           </p>
         </div>
 
-        {/* Owner Info with Scroll Animation */}
+        {/* Owner Info Card with Scroll Animation and Hover Effect */}
         <motion.div
-          className="mt-16 flex flex-col items-center gap-4"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-16 inline-block bg-[#1A1A1A] rounded-xl p-8 shadow-2xl transition-all duration-500 border border-transparent hover:border-[#2196F3]/50"
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: "easeOut" }}
+          whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
         >
-          <img
-            src="/owner/owner.jpg" // replace with your actual owner photo
-            alt="Owner"
-            className="w-32 h-32 rounded-full object-cover border-4 border-primary shadow-lg"
-          />
-          <h3 className="text-xl sm:text-2xl font-semibold">Vijay Chaudhary</h3>
-          <a
-            href="https://instagram.com/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-primary hover:text-accent transition text-lg"
-          >
-            <FaInstagram className="text-2xl" />
-            @yourusername
-          </a>
+          <div className="flex flex-col items-center gap-4">
+            <img
+              src="/owner/owner.jpg" // replace with your actual owner photo
+              alt={OWNER_NAME}
+              className="w-32 h-32 rounded-full object-cover border-4 border-[#2196F3] shadow-lg grayscale hover:grayscale-0 transition duration-500"
+            />
+            <h3 className="text-2xl sm:text-3xl font-bold text-white">
+              {OWNER_NAME}
+            </h3>
+            
+            {/* Instagram Link */}
+            <a
+              href={OWNER_Youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[#2196F3] hover:text-white transition text-lg font-medium"
+              aria-label={`Follow ${OWNER_NAME} on Instagram`}
+            >
+              <FaYoutube className="text-2xl" />
+              {OWNER_USERNAME}
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

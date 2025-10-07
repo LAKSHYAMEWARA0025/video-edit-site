@@ -1,53 +1,87 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const SCROLL_THRESHOLD = 100;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [SCROLL_THRESHOLD]);
+
+  const CAL_LINK = "https://cal.com/itsvijaychoudhary/schedule-a-call";
+
+  const navItems = [
+    { href: "#about", label: "About" },
+    { href: "#services", label: "Services" },
+    { href: "#testimonials", label: "Testimonials" },
+  ];
 
   return (
-    <header className="w-full bg-bg text-textMain shadow-md fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo + Site Name */}
-          <div className="flex items-center space-x-2">
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 
+                  overflow-x-hidden overflow-y-hidden
+                  ${scrolled
+                    ? "bg-[#121212]/95 backdrop-blur-md shadow-lg"
+                    : "bg-transparent"}`}
+    >
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center h-20 px-4 sm:px-6 lg:px-8">
+          <a
+            href="#top"
+            className="flex items-center space-x-2 sm:space-x-3 transition-opacity duration-300 hover:opacity-80 flex-shrink-0"
+          >
             <img
-              src="/logo/Whitelogo.png" // Replace this with your actual logo
+              src="/logo/Whitelogo.png"
               alt="Logo"
-              className="w-20 h-25"
+              className="w-24 md:w-28 h-auto drop-shadow-lg brightness-125"
             />
-            <span className="text-xl font-bold text-primary">TheFinalCut</span>
-          </div>
+            {/* <span className="text-2xl md:text-3xl font-bold text-white tracking-wide truncate min-w-0">
+              TheFinalCut
+            </span> */}
+          </a>
 
-          {/* Center Links (Hidden on Mobile) */}
-          <nav className="hidden md:flex space-x-8 text-sm font-heading font-medium">
-            <a href="#about" className="hover:text-accent transition">
-              About
-            </a>
-            <a href="#services" className="hover:text-accent transition">
-              Services
-            </a>
-            <a href="#testimonials" className="hover:text-accent transition">
-              Testimonials
-            </a>
+          <nav className="hidden md:flex space-x-10 text-lg font-medium">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-white hover:text-[#2196F3] transition-colors duration-300"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
 
-          {/* Right CTA */}
           <div className="hidden md:block">
             <a
-              href="#contact"
-              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-accent transition"
+              href={CAL_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`px-6 py-2.5 rounded-md text-lg font-semibold transition-all duration-300 border ${
+                scrolled
+                  ? "border-[#2196F3] text-white hover:bg-[#2196F3] hover:text-white"
+                  : "border-white text-white hover:bg-[#2196F3] hover:border-[#2196F3]"
+              }`}
             >
               Book a Call
             </a>
           </div>
 
-          {/* Mobile Hamburger */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="focus:outline-none"
+              className="focus:outline-none text-white"
+              aria-label="Toggle navigation menu"
             >
               <svg
-                className="w-6 h-6"
+                className="w-7 h-7"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -74,22 +108,31 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-bg px-4 pb-4">
-          <nav className="flex flex-col space-y-3 text-sm font-medium pt-4 border-t border-gray-700">
-            <a href="#about" className="hover:text-accent transition">
-              About
-            </a>
-            <a href="#services" className="hover:text-accent transition">
-              Services
-            </a>
-            <a href="#testimonials" className="hover:text-accent transition">
-              Testimonials
-            </a>
+        <div
+          className="md:hidden px-4 sm:px-6 lg:px-8 pb-5 transition-all bg-[#000000] shadow-xl"
+        >
+          <nav className="flex flex-col space-y-4 text-base font-medium pt-4 border-t border-gray-700">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-white hover:text-[#2196F3] transition-colors duration-300 block px-4 py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
             <a
-              href="#contact"
-              className="mt-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-accent transition w-fit"
+              href={CAL_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-2 px-5 py-2 rounded-md border w-fit transition-all duration-300 font-semibold ${
+                scrolled
+                  ? "border-[#2196F3] text-white hover:bg-[#2196F3]"
+                  : "border-white text-white hover:bg-[#2196F3] hover:border-[#2196F3]"
+              }`}
+              onClick={() => setIsOpen(false)}
             >
               Book a Call
             </a>

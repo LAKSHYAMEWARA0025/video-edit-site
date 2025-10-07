@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+// --- Design Palette Mapping ---
+// Black: #000000 (background)
+// Charcoal Gray: #1A1A1A (item background)
+// Electric Blue: #2196F3 (accent)
 
 const faqs = [
   {
@@ -24,6 +29,28 @@ const faqs = [
   },
 ];
 
+// Variants for smooth opening/closing animation
+const collapseVariants = {
+  open: {
+    height: "auto",
+    opacity: 1,
+    paddingTop: "1rem", // p-4 equivalent
+    transition: {
+      height: { duration: 0.4, ease: "easeOut" },
+      opacity: { duration: 0.25, delay: 0.1 },
+    },
+  },
+  collapsed: {
+    height: 0,
+    opacity: 0,
+    paddingTop: "0rem",
+    transition: {
+      height: { duration: 0.4, ease: "easeOut" },
+      opacity: { duration: 0.25 },
+    },
+  },
+};
+
 const FAQItem = ({
   question,
   answer,
@@ -34,43 +61,63 @@ const FAQItem = ({
   const [open, setOpen] = useState(false);
 
   return (
+    // Outer container for layout, allowing Framer Motion to animate surrounding elements
     <motion.div
       layout
-      onClick={() => setOpen(!open)}
-      className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-6 mb-4 cursor-pointer transition-all duration-300 hover:border-white/20"
+      className="w-full bg-[#1A1A1A] rounded-xl mb-4 transition-all duration-300 shadow-xl border border-transparent hover:border-[#2E2E2E]"
     >
-      <div className="flex justify-between items-center gap-4">
-        <h4 className="text-base sm:text-lg font-semibold text-white font-inter">
+      
+      {/* Question Header (Clickable Area) */}
+      <div
+        onClick={() => setOpen(!open)}
+        className="flex justify-between items-center p-5 sm:p-6 cursor-pointer"
+      >
+        <h4 className="text-base sm:text-lg font-semibold text-white max-w-[90%]">
           {question}
         </h4>
-        <button className="text-lg sm:text-xl text-white font-bold transition-transform duration-200">
-          {open ? "−" : "+"}
-        </button>
-      </div>
-      {open && (
-        <motion.p
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-3 text-sm sm:text-base text-gray-300 font-inter leading-relaxed"
+        <motion.button 
+          className="text-xl font-bold text-[#2196F3] transition-transform duration-300 flex-shrink-0"
+          animate={{ rotate: open ? 45 : 0 }} // Rotates the '+' into an 'x'
+          aria-expanded={open}
         >
-          {answer}
-        </motion.p>
-      )}
+          {open ? "−" : "+"}
+        </motion.button>
+      </div>
+
+      {/* Answer Content (Animated Collapse/Expand) */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={collapseVariants}
+            className="overflow-hidden px-5 sm:px-6" // Hides overflow during height animation
+          >
+            <motion.p className="text-sm sm:text-base text-gray-400 pb-5 leading-relaxed">
+              {answer}
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
 
 const Questions = () => {
   return (
-    <section className="px-4 sm:px-6 lg:px-8 py-16">
-      {/* FAQ */}
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-oswald font-bold text-center mb-3">
-          Frequently Asked Questions
+    <section className="bg-[#000000] py-20 px-4 sm:px-6 lg:px-8">
+      {/* FAQ Container */}
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-white text-center mb-4">
+          Frequently Asked <span className="text-[#2196F3]">Questions</span>
         </h2>
-        <p className="text-center text-sm sm:text-base text-gray-400 mb-10 font-inter">
-          Get answers to the most common questions about our services
+        <p className="text-center text-base sm:text-lg text-gray-500 mb-12">
+          Get answers to the most common questions about our services.
         </p>
+        
+        {/* Render FAQ Items */}
         {faqs.map((f, idx) => (
           <FAQItem key={idx} question={f.question} answer={f.answer} />
         ))}

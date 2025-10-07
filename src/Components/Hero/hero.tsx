@@ -1,76 +1,134 @@
 import { motion } from "framer-motion";
+import React from "react";
 
-const Hero = () => {
+// --- Design Palette Mapping ---
+// Black: #000000 (background)
+// Charcoal Gray: #121212 
+// Steel Gray: #2E2E2E 
+// Electric Blue: #2196F3 (Accent)
+
+const Hero: React.FC = () => {
+  
+  // Animation variants for the main content block (staggered entry)
+  const contentVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        staggerChildren: 0.2, // Increased stagger for better visual effect
+      },
+    },
+  };
+
+  // Animation variants for individual text lines and buttons (fade up)
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const statItems = [
+    "100M+ Views generated",
+    "3+ years of building a personal brand",
+    "400+ videos created",
+  ];
+
   return (
-    <section className="relative w-full h-screen overflow-hidden pt-16">
-      {/* Video Background */}
+    // Base background is Black, height covers the screen
+    <section className="relative w-full h-screen min-h-[600px] bg-[#000000] overflow-hidden">
+      
+      {/* Video Background - Ensures full coverage, even on mobile/desktop aspect ratios */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover transform -translate-x-1/2 -translate-y-1/2"
       >
         <source src="/HomePageBg/HomepageBG.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      {/* Overlay: Dark overlay opacity reduced from 80% to 50% so the video is visible */}
+      <div className="absolute inset-0 bg-[#121212]/50"></div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center text-textMain">
+      {/* Hero Content - FIX: Added overflow-x-hidden for responsive safety */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center 
+                   min-h-[calc(100vh-80px)] pt-48 pb-10 px-4 text-center text-white w-full overflow-x-hidden"
+        // variants={contentVariants} // Applied contentVariants here for staggered children
+        initial="hidden"
+        animate="visible"
+      >
         {/* Headline */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading leading-tight max-w-4xl">
+        <motion.h1
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-5xl drop-shadow-lg"
+          variants={itemVariants}
+        >
           We help{" "}
-          <span className="text-textMuted underline underline-offset-4">
+          <span className="text-[#2196F3] underline decoration-solid underline-offset-8">
             startups and businesses
           </span>{" "}
           build{" "}
-          their profitable personal brands{" "}
+          <span className="text-white">
+            their profitable personal brands
+          </span>{" "}
           that actually{" "}
-          <span className="text-textMuted underline underline-offset-4">
+          <span className="text-[#2196F3] underline decoration-solid underline-offset-8">
             creates distribution.
           </span>
-        </h1>
+        </motion.h1>
 
         {/* Subtext */}
-        <p className="mt-6 max-w-2xl text-base sm:text-lg text-textMuted font-primary">
+        <motion.p
+          className="mt-8 max-w-3xl text-base sm:text-xl text-gray-300 font-light"
+          variants={itemVariants}
+        >
           Transform your knowledge into compelling short-form videos that
           captivate your audience, generate leads effortlessly, and build a
           brand they can’t ignore.
-        </p>
+        </motion.p>
 
         {/* CTA Button */}
-        <a
-          href="#contact"
-          className="mt-6 bg-primary text-white px-6 py-3 rounded-md hover:bg-accent transition font-medium"
-        >
-          Book a Free Discovery Call
-        </a>
+        <motion.div variants={itemVariants} className="mt-10">
+          <a
+            href="https://cal.com/itsvijaychoudhary/schedule-a-call"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#2196F3] text-white px-10 py-3.5 rounded-lg shadow-xl shadow-[#2196F3]/40 
+                       text-lg font-semibold tracking-wide uppercase transition-all duration-300 
+                       hover:bg-white hover:text-[#2196F3] hover:shadow-none transform hover:scale-[1.02]"
+          >
+            Book a Free Discovery Call
+          </a>
+        </motion.div>
 
-        {/* Stat Buttons */}
+        {/* Stat Buttons - FIX: Ensured wrapping on small screens (added md:flex-row) */}
         <motion.div
-          className="mt-10 flex flex-wrap justify-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
+          className="mt-16 flex flex-col md:flex-row justify-center gap-4 max-w-5xl"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { transition: { staggerChildren: 0.1 } },
+          }}
         >
-          {[
-            "100M+ Views generated",
-            "3+ years of building a personal brand",
-            "400+ videos created",
-          ].map((text, idx) => (
-            <button
+          {statItems.map((text, idx) => (
+            <motion.button
               key={idx}
-              className="flex items-center gap-2 border border-textMuted px-4 py-2 rounded-full bg-bg/70 backdrop-blur-sm hover:bg-bg/90 hover:scale-105 hover:text-white transition-all duration-300 text-sm text-textMuted"
+              variants={itemVariants}
+              className="flex items-center justify-center text-center gap-2 border border-[#2E2E2E] px-5 py-2 rounded-full 
+                          bg-[#1A1A1A]/70 backdrop-blur-sm 
+                          hover:bg-[#2196F3] hover:border-[#2196F3] hover:text-white 
+                          transition-all duration-300 text-sm text-gray-300 shadow-lg w-full md:w-auto"
             >
-              {/* Optional icon can go here */}
               {text}
-            </button>
+            </motion.button>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

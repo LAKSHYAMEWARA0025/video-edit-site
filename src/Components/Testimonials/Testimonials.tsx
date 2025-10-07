@@ -1,6 +1,11 @@
-// src/components/Testimonials.tsx
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+// FIX: Using specific icon imports to improve resolution reliability
+import { FaChevronLeft, FaChevronRight, FaVolumeUp, FaVolumeMute, FaPlay, FaPause } from 'react-icons/fa'; 
+
+// --- Design Constants ---
+const ACCENT_BLUE = "#2196F3";
+const CARD_BG = "#1A1A1A"; // Charcoal Gray
 
 interface Testimonial {
   video: string;
@@ -15,21 +20,21 @@ const testimonials: Testimonial[] = [
     name: "Aarushi",
     role: "Founder, SocialSphere",
     review:
-      "They always delivered on time and were always up for last minute changes. Really good ctr.",
+      "He always delivered on time and were always up for last minute changes. Really good ctr.",
   },
   {
     video: "/videos/Raj.mp4",
     name: "Raj",
     role: "Marketing Head, FinEdge",
     review:
-      "They takes the ownership. I would call him around 2 Am and will tell him that we need it live within next 12 hours and he delivers it!.",
+      "He takes the ownership. I would call him around 2 Am and will tell him that we need it live within next 12 hours and he delivers it!.",
   },
   {
     video: "/videos/Saumya.mov",
     name: "Saumya",
     role: "Content Strategist, BrandNest",
     review:
-      "-Very satisfied and impress by his work, very talented and hardworking guy! He takes the reliability!",
+      "Very satisfied and impress by his work, very talented and hardworking guy! He takes the responsibility!",
   },
   {
     video: "/videos/Shreyansh.mp4",
@@ -47,79 +52,23 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-const Testimonials = () => {
-  const [index, setIndex] = useState(0);
-
-  // Auto-play every 6s
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const nextTestimonial = () =>
-    setIndex((prev) => (prev + 1) % testimonials.length);
-  const prevTestimonial = () =>
-    setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-
-  return (
-    <section className="bg-[#0e0f1b] text-white py-20 px-6 sm:px-12 md:px-20 relative">
-      <h2 className="text-4xl sm:text-5xl font-oswald font-bold text-center mb-14">
-        What people say when we’re not in the room
-      </h2>
-
-      <div className="relative max-w-5xl mx-auto">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row items-center gap-8 bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg"
-          >
-            {/* Video */}
-            <VideoPlayer src={testimonials[index].video} />
-
-            {/* Text */}
-            <div className="flex-1">
-              <h4 className="text-xl font-semibold text-white mb-2">
-                {testimonials[index].name}
-              </h4>
-              <p className="text-sm text-gray-400 mb-4">
-                {testimonials[index].role}
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                "{testimonials[index].review}"
-              </p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation Buttons */}
-        <button
-          onClick={prevTestimonial}
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-orange-500/70 hover:bg-orange-600/80 text-white p-3 rounded-full shadow-md transition"
-        >
-          ◀
-        </button>
-        <button
-          onClick={nextTestimonial}
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-orange-500/70 hover:bg-orange-600/80 text-white p-3 rounded-full shadow-md transition"
-        >
-          ▶
-        </button>
-      </div>
-    </section>
-  );
-};
-
-// 🎥 Video Player Component
+// 🎥 Video Player Component (Self-contained controls)
 const VideoPlayer = ({ src }: { src: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+
+  // Auto-play/pause when the source changes
+  useEffect(() => {
+      // Ensure video plays when component mounts or source updates
+      videoRef.current?.play();
+      
+      // Cleanup: pause video when the component is removed
+      return () => {
+          videoRef.current?.pause();
+      };
+  }, [src]);
+
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -133,36 +82,126 @@ const VideoPlayer = ({ src }: { src: string }) => {
 
   const toggleMute = () => {
     if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
+    const newMutedState = !isMuted;
+    videoRef.current.muted = newMutedState;
+    setIsMuted(newMutedState);
   };
 
   return (
-    <div className="relative w-full md:w-[280px] aspect-[9/16] rounded-xl overflow-hidden shadow-md">
+    <div 
+        className="relative w-full md:w-[280px] aspect-[9/16] rounded-xl overflow-hidden shadow-2xl transition-all duration-300 group"
+        style={{ boxShadow: `0 0 10px ${ACCENT_BLUE}` }}
+    >
       <video
         ref={videoRef}
+        key={src} // Key is vital for remounting video when testimonial changes
         src={src}
         autoPlay
         loop
-        muted
+        muted={isMuted}
         playsInline
         className="w-full h-full object-cover"
       />
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-3">
+      
+      {/* Controls Overlay */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+        
+        {/* Play/Pause Button */}
         <button
           onClick={togglePlay}
-          className="bg-orange-500/70 text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-orange-600/80 transition"
+          className="bg-black/50 hover:bg-black/80 text-white p-3 rounded-full transition shadow-lg"
+          aria-label={isPlaying ? "Pause Video" : "Play Video"}
         >
-          {isPlaying ? "Pause" : "Play"}
+          {isPlaying ? <FaPause className="text-xl" /> : <FaPlay className="text-xl" />}
         </button>
+        
+        {/* Mute Button */}
         <button
           onClick={toggleMute}
-          className="bg-orange-500/70 text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-orange-600/80 transition"
+          className="bg-black/50 hover:bg-black/80 text-white p-3 rounded-full transition shadow-lg"
+          aria-label={isMuted ? "Unmute Video" : "Mute Video"}
         >
-          {isMuted ? "Unmute" : "Mute"}
+          {isMuted ? <FaVolumeMute className="text-xl" /> : <FaVolumeUp className="text-xl" />}
         </button>
       </div>
     </div>
+  );
+};
+
+// --- Main Component ---
+const Testimonials = () => {
+  const [index, setIndex] = useState(0);
+
+  // Navigation handlers
+  const nextTestimonial = useCallback(() => {
+    setIndex((prev) => (prev + 1) % testimonials.length);
+  }, []);
+
+  const prevTestimonial = useCallback(() => {
+    setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, []);
+
+  // Timer logic is REMOVED, manual navigation only.
+
+  return (
+    <section id="testimonials" className="bg-[#000000] text-white py-24 px-6 sm:px-10 lg:px-20 relative overflow-hidden">
+      
+      {/* Heading style updated to match the Hero component */}
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white text-center mb-16 uppercase tracking-wider">
+        What people say <span className="text-[#2196F3]">when we’re not</span> in the room
+      </h2>
+
+      <div className="relative max-w-5xl mx-auto">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={index} // Key is essential for AnimatePresence to work
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            
+            // Card Style: Charcoal background, shadow, and responsive layout
+            className="flex flex-col md:flex-row items-center gap-10 bg-[#1A1A1A] p-8 rounded-2xl shadow-2xl shadow-black/50 border border-[#2E2E2E]"
+          >
+            {/* Video Player */}
+            <VideoPlayer src={testimonials[index].video} />
+
+            {/* Text Review */}
+            <div className="flex-1 space-y-4 md:space-y-6">
+              <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                {testimonials[index].name}
+              </h4>
+              <p className="text-sm text-[#2196F3] font-semibold mb-4 uppercase tracking-wider">
+                {testimonials[index].role}
+              </p>
+              <p className="text-lg sm:text-xl text-gray-300 leading-relaxed italic border-l-4 border-[#2196F3] pl-4">
+                "{testimonials[index].review}"
+              </p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Buttons */}
+        <motion.button
+          onClick={prevTestimonial}
+          className="absolute -left-3 top-1/2 -translate-y-1/2 bg-[#2196F3] hover:bg-white text-white hover:text-[#2196F3] p-3 rounded-full shadow-lg transition duration-300 z-20 hidden md:block"
+          aria-label="Previous Testimonial"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaChevronLeft className="text-xl" />
+        </motion.button>
+        <motion.button
+          onClick={nextTestimonial}
+          className="absolute -right-3 top-1/2 -translate-y-1/2 bg-[#2196F3] hover:bg-white text-white hover:text-[#2196F3] p-3 rounded-full shadow-lg transition duration-300 z-20 hidden md:block"
+          aria-label="Next Testimonial"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaChevronRight className="text-xl" />
+        </motion.button>
+      </div>
+    </section>
   );
 };
 

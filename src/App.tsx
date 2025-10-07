@@ -1,4 +1,6 @@
-import Body from "./Components/Body/body"
+// import Body from "./Components/Body/body"
+import LongFormSection from "./Components/Body/LongForm"
+import ShortFormSection from "./Components/Body/ShortForm"
 import Questions from "./Components/Body2/questions"
 import Creators from "./Components/Creators/Creators"
 import Footer from "./Components/Footer/footer"
@@ -18,7 +20,9 @@ function App() {
       <Hero/>
       <TrustedBy/>
       <SecretSauce/>
-      <Body/>
+      <ShortFormSection/>
+      <LongFormSection/>
+      {/* <Body/> */}
       <OwnerInfo/>
       <Creators/>
       <Testimonials/>
