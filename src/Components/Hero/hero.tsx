@@ -30,18 +30,36 @@ const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen w-full bg-black bg-[url('/HomePageBg/homepage.jpg')] bg-center bg-cover">
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-2"></div>
+      <div className="absolute inset-0 z-10 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,0,0,0.5)_30%,rgba(0,0,0,0.85)_80%,rgba(0,0,0,1)_100%)]"></div>
 
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 py-20 md:py-32 gap-8">
         {/* Headline */}
-        <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white max-w-5xl tracking-tight" variants={itemVariants} initial="hidden" animate="visible">
-          We help <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">startups and businesses</span> build their profitable <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">personal brands</span> that actually creates distribution.
+        <motion.h1
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bebas text-white max-w-5xl tracking-tight"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          We help{" "}
+          <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">
+            startups and businesses
+          </span>{" "}
+          build their profitable{" "}
+          <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">
+            personal brands
+          </span>{" "}
+          that actually creates distribution.
         </motion.h1>
 
         {/* Subtext */}
-        <motion.p className="text-gray-300 text-lg sm:text-xl max-w-3xl" variants={itemVariants}>
-          Transform your knowledge into compelling short-form videos that captivate your audience, generate leads effortlessly, and build a brand they can’t ignore.
+        <motion.p
+          className="text-gray-300 text-lg sm:text-xl max-w-3xl"
+          variants={itemVariants}
+        >
+          Transform your knowledge into compelling short-form videos that
+          captivate your audience, generate leads effortlessly, and build a
+          brand they can’t ignore.
         </motion.p>
 
         {/* CTA */}
@@ -57,9 +75,21 @@ const Hero: React.FC = () => {
         </motion.div>
 
         {/* Stats */}
-        <motion.div className="flex flex-col md:flex-row gap-4 mt-8 w-full max-w-5xl justify-center" variants={{ hidden: { opacity: 0.7 }, visible: { transition: { staggerChildren: 0.2 } } }} initial="hidden" animate="visible">
+        <motion.div
+          className="flex flex-col md:flex-row gap-4 mt-8 w-full max-w-5xl justify-center"
+          variants={{
+            hidden: { opacity: 0.7 },
+            visible: { transition: { staggerChildren: 0.2 } },
+          }}
+          initial="hidden"
+          animate="visible"
+        >
           {statItems.map((item, idx) => (
-            <motion.div key={idx} variants={itemVariants} className="flex items-center gap-3 px-5 py-3 rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-white text-base md:text-lg w-full md:w-auto justify-center">
+            <motion.div
+              key={idx}
+              variants={itemVariants}
+              className="flex items-center gap-3 px-5 py-3 rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-white text-base md:text-lg w-full md:w-auto justify-center"
+            >
               <item.icon className="w-6 h-6 text-white/90" />
               <span className="font-semibold">{item.text}</span>
             </motion.div>

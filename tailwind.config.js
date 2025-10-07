@@ -24,6 +24,9 @@ export default {
       fontFamily: {
         primary: ["Inter", "sans-serif"],
         heading: ["Oswald", "sans-serif"],
+        syne: ['Syne', 'sans-serif'],
+        bebas: ['Bebas Neue', 'sans-serif'],
+        exo: ['Exo 2', 'sans-serif'],
       },
 
       animation: {
