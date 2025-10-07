@@ -30,7 +30,9 @@ const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen w-full bg-black bg-[url('/HomePageBg/homepage.jpg')] bg-center bg-cover">
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-2"></div>
+      {/* <div className="absolute inset-0 bg-black/60 z-2"></div>
+       */}
+       <div className="absolute inset-0 z-10 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,0,0,0.5)_30%,rgba(0,0,0,0.85)_80%,rgba(0,0,0,1)_100%)]"></div>
 
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 py-20 md:py-32 gap-8">
