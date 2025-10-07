@@ -3,7 +3,7 @@ import React from "react";
 
 const PlayIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-    <path fill="currentColor" d="M549.655 124.083c-6.28-23.746-24.835-42.228-48.4-48.423C477.595 59.837 452.548 64 288 64S98.405 59.837 74.745 75.66c-23.565 6.195-42.12 24.677-48.4 48.423C22.32 153.29 20 206 20 256s2.32 102.71 6.345 131.917c6.28 23.746 24.835 42.228 48.4 48.423C98.405 454.163 123.452 448 288 448s189.595 6.163 213.255-9.66c23.565-6.195 42.12-24.677 48.4-48.423C553.68 358.71 556 306 556 256s-2.32-102.71-6.345-131.917zM288 368c-57.392 0-104-46.608-104-104s46.608-104 104-104 104 46.608 104 104-46.608 104-104 104zM232 216V300L352 258L232 216z"/>
+    <path fill="currentColor" d="M549.655 124.083c-6.28-23.746-24.835-42.228-48.4-48.423C477.595 59.837 452.548 64 288 64S98.405 59.837 74.745 75.66c-23.565 6.195-42.12 24.677-48.4 48.423C22.32 153.29 20 206 20 256s2.32 102.71 6.345 131.917c6.28 23.746 24.835 42.228 48.4 48.423C98.405 454.163 123.452 448 288 448s189.595 6.163 213.255-9.66c23.565 6.195 42.12-24.677 48.4-48.423C553.68 358.71 556 306 556 256s-2.32-102.71-6.345-131.917zM288 368c-57.392 0-104-46.608-104-104s46.608-104 104-104 104 46.608 104 104-46.608 104-104 104zM232 216V300L352 258L232 216z"/>
   </svg>
 );
 
@@ -30,18 +30,17 @@ const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen w-full bg-black bg-[url('/HomePageBg/homepage.jpg')] bg-center bg-cover">
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50 z-2"></div>
-{/* <div className="w-full h-24 bg-red-600">TEST HERO RENDER</div> */}
+      <div className="absolute inset-0 bg-black/60 z-2"></div>
 
       {/* Hero content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 py-20 md:py-32 gap-6">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 py-20 md:py-32 gap-8">
         {/* Headline */}
-        <motion.h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white max-w-5xl" variants={itemVariants} initial="hidden" animate="visible">
-          We help <span className="text-[#2196F3] underline decoration-solid underline-offset-8">startups and businesses</span> build <span className="text-white">their profitable personal brands</span> that actually <span className="text-[#2196F3] underline decoration-solid underline-offset-8">creates distribution.</span>
+        <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white max-w-5xl tracking-tight" variants={itemVariants} initial="hidden" animate="visible">
+          We help <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">startups and businesses</span> build their profitable <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">personal brands</span> that actually creates distribution.
         </motion.h1>
 
         {/* Subtext */}
-        <motion.p className="text-gray-300 text-base sm:text-xl max-w-3xl" variants={itemVariants}>
+        <motion.p className="text-gray-300 text-lg sm:text-xl max-w-3xl" variants={itemVariants}>
           Transform your knowledge into compelling short-form videos that captivate your audience, generate leads effortlessly, and build a brand they can’t ignore.
         </motion.p>
 
@@ -51,18 +50,18 @@ const Hero: React.FC = () => {
             href="https://cal.com/itsvijaychoudhary/schedule-a-call"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#2196F3] text-white px-10 py-3.5 rounded-lg shadow-xl shadow-[#2196F3]/40 text-lg font-semibold uppercase hover:bg-white hover:text-[#2196F3] transition-all duration-300"
+            className="bg-[linear-gradient(to_right,#262626,#502D1B_45%,#BF4C13)] text-white px-8 sm:px-10 py-4 rounded-lg shadow-xl shadow-orange-500/30 text-base sm:text-lg font-bold uppercase transition-all duration-300 transform hover:scale-105"
           >
             Book a Free Discovery Call
           </a>
         </motion.div>
 
         {/* Stats */}
-        <motion.div className="flex flex-col md:flex-row gap-4 w-full max-w-5xl justify-center" variants={{ hidden: { opacity: 0.7 }, visible: { transition: { staggerChildren: 0.2 } } }} initial="hidden" animate="visible">
+        <motion.div className="flex flex-col md:flex-row gap-4 mt-8 w-full max-w-5xl justify-center" variants={{ hidden: { opacity: 0.7 }, visible: { transition: { staggerChildren: 0.2 } } }} initial="hidden" animate="visible">
           {statItems.map((item, idx) => (
-            <motion.div key={idx} variants={itemVariants} className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/50 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/80 transition-all duration-300 text-white text-base md:text-lg w-full md:w-auto justify-center">
-              <item.icon className="w-5 h-5 text-white/80" />
-              <span className="font-medium">{item.text}</span>
+            <motion.div key={idx} variants={itemVariants} className="flex items-center gap-3 px-5 py-3 rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-white text-base md:text-lg w-full md:w-auto justify-center">
+              <item.icon className="w-6 h-6 text-white/90" />
+              <span className="font-semibold">{item.text}</span>
             </motion.div>
           ))}
         </motion.div>
@@ -72,3 +71,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
