@@ -3,8 +3,7 @@ import { motion, Variants } from "framer-motion";
 
 // --- Design Palette Mapping ---
 const CHARCOAL_BG = "#1A1A1A"; // Secondary Background (Card Body)
-// const STEEL_GRAY = "#2E2E2E"; // UI elements / dividers
-// const ACCENT_BLUE = "#2196F3"; // Electric Blue (Accent)
+const GOLD_ORANGE_ACCENT = "#E1A233"; // Light Gold/Orange Accent
 
 interface Step {
   title: string;
@@ -17,19 +16,19 @@ const steps: Step[] = [
     title: "Brand Ideation and Strategy",
     text:
       "In a single powerful session, we’ll map your entire content ecosystem—shaping your unique angle, refining your style, designing impactful hooks, and building a strategy that adds the wow factor. Within a week, you’ll have a clear 1–3 month brand strategy ready. By week two, your brand assets will be finalized and content production will be underway.",
-    img: "/SecretSauce/bb.png", // NEW IMAGE HERE
+    img: "/SecretSauce/bb.png",
   },
   {
     title: "Filming and Editing",
     text:
       "Once we receive all the raw files, we’ll kick off the editing process. Throughout the shoot, we’ll guide and support you at every step. After editing, we’ll create the copies to go along with the content—and just like that, your content will be ready to go live.",
-    img: "/SecretSauce/FilmingEditing.jpg", // KEEP EXISTING IMAGE
+    img: "/SecretSauce/FilmingEditing.jpg",
   },
   {
     title: "Watch your brand scale",
     text:
       "Once your content goes live, it will become a massive support system for your business. Think of it like the iceberg beneath the surface—driving leads and sales that aren’t immediately visible. Beyond that, whether it’s hiring, sharing your ideas, closing high-ticket clients, or generating inbound leads—everything flows through one powerful engine: your personal brand.",
-    img: "/SecretSauce/WatchYourBrandScale.jpg", // KEEP EXISTING IMAGE
+    img: "/SecretSauce/WatchYourBrandScale.jpg",
   },
 ];
 
@@ -92,8 +91,9 @@ const SecretSauce: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Title */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-16">
-          What’s the <span className="text-[#2196F3]">Secret?</span>
+        {/* NOTE: 'font-secondary' is a custom class. Ensure it's defined in your Tailwind config. */}
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-secondary font-extrabold text-center mb-16">
+          What’s the <span className="text-[#BF4C13]">Secret?</span>
         </h2>
 
         <div className="flex flex-col gap-28">
@@ -101,7 +101,7 @@ const SecretSauce: React.FC = () => {
             <motion.div
               key={idx}
               className={`flex flex-col items-center gap-10 md:gap-16 perspective-xl group 
-                          ${idx % 2 !== 0 ? "md:flex-row-reverse" : "md:flex-row"}`}
+                           ${idx % 2 !== 0 ? "md:flex-row-reverse" : "md:flex-row"}`}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -115,7 +115,7 @@ const SecretSauce: React.FC = () => {
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <SpotlightWrapper 
-                  spotlightColor="#2196F3"
+                  spotlightColor={GOLD_ORANGE_ACCENT}
                   className="rounded-xl transition duration-300 w-full"
                 >
                   <div 
@@ -136,10 +136,11 @@ const SecretSauce: React.FC = () => {
                 className={`w-full md:w-1/2 space-y-4 p-4`}
                 variants={itemVariants}
               >
-                <span className="text-sm font-semibold text-[#2196F3] uppercase tracking-wider">
+                <span className={`text-sm font-semibold text-[${GOLD_ORANGE_ACCENT}] uppercase tracking-wider`}>
                   STEP {idx + 1}
                 </span>
-                <h3 className="text-3xl md:text-4xl font-extrabold text-white">
+                {/* NOTE: 'font-secondary' is a custom class. Ensure it's defined in your Tailwind config. */}
+                <h3 className="text-3xl md:text-4xl font-secondary font-normal bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent pb-2">
                   {step.title}
                 </h3>
                 <p className="text-base sm:text-lg leading-relaxed text-gray-300">
