@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight, FaVolumeUp, FaVolumeMute, FaPlay, FaPaus
 
 // --- Design Constants ---
 const ACCENT_BLUE = "#2196F3";
-const CARD_BG = "#1A1A1A"; // Charcoal Gray
+// const CARD_BG = "#1A1A1A"; // Charcoal Gray
 
 interface Testimonial {
   video: string;
@@ -17,36 +17,36 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     video: "/videos/Aarushi.MP4",
-    name: "Aarushi",
-    role: "Founder, SocialSphere",
+    name: "Aarushi Bedi",
+    role: "Founder of The Fluent Flyers, Ex International Cabin Crew",
     review:
       "He always delivered on time and were always up for last minute changes. Really good ctr.",
   },
   {
     video: "/videos/Raj.mp4",
-    name: "Raj",
-    role: "Marketing Head, FinEdge",
+    name: "Striver(Raj)",
+    role: "Founder of TUF, ex SDE at Google & Amazon",
     review:
       "He takes the ownership. I would call him around 2 Am and will tell him that we need it live within next 12 hours and he delivers it!.",
   },
   {
     video: "/videos/Saumya.mov",
-    name: "Saumya",
-    role: "Content Strategist, BrandNest",
+    name: "Saumya Singh",
+    role: "TEDx Speaker, Josh Talks Speaker, ex-SDE at RedHat",
     review:
       "Very satisfied and impress by his work, very talented and hardworking guy! He takes the responsibility!",
   },
   {
     video: "/videos/Shreyansh.mp4",
-    name: "Shreyansh",
-    role: "CEO, MarketMinds",
+    name: "Shreyansh Goyal",
+    role: "TEDx speaker, SDE",
     review:
       "I started working with him when I had somewhat 2k subscribers and with him I've scaled to 150k subscribers.",
   },
   {
     video: "/videos/VidhiKalra.mp4",
     name: "Vidhi Karla",
-    role: "Entrepreneur",
+    role: "Founder of 5-minute economics",
     review:
       "He is really good with editing and apart from that he also helped me grow my channel 10x.",
   },
