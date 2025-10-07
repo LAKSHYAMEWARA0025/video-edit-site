@@ -165,7 +165,7 @@ const Testimonials = () => {
   );
 
   return (
-    <section className="bg-[#000000] text-white py-24 px-6 sm:px-10 lg:px-20 relative overflow-hidden font-primary">
+    <section id="testimonials" className="bg-[#000000] text-white py-24 px-6 sm:px-10 lg:px-20 relative overflow-hidden font-primary">
       <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-16 uppercase tracking-wider">
         What people say{" "}
         <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">
