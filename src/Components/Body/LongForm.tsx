@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, SVGProps } from "react";
+import { useRef, useState, useEffect, SVGProps, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // --- SVG Icons (to remove external dependency) ---
@@ -76,6 +76,24 @@ const LongFormSection = () => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  const handleNext = useCallback(() => {
+    setIndex((prev) => (prev + 1) % longFormContent.length);
+    setIsPlaying(true);
+  }, []);
+
+  const handlePrev = () => {
+    setIndex((prev) => (prev - 1 + longFormContent.length) % longFormContent.length);
+    setIsPlaying(true);
+  };
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleNext();
+    }, 8000); 
+    return () => clearTimeout(timer);
+  }, [index, handleNext]);
+
+
   useEffect(() => {
     const vid = videoRef.current;
     if (!vid) return;
@@ -87,15 +105,6 @@ const LongFormSection = () => {
     }
   }, [index, isPlaying, isMuted]);
 
-  const handleNext = () => {
-    setIndex((prev) => (prev + 1) % longFormContent.length);
-    setIsPlaying(true);
-  };
-  const handlePrev = () => {
-    setIndex((prev) => (prev - 1 + longFormContent.length) % longFormContent.length);
-    setIsPlaying(true);
-  };
-
   const togglePlay = () => setIsPlaying(!isPlaying);
   const toggleMute = () => setIsMuted(!isMuted);
 
@@ -104,101 +113,91 @@ const LongFormSection = () => {
   return (
     <section className="relative bg-[#000000] text-white py-20 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-16 uppercase tracking-wider font-secondary">
-        Our Signature <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">Video Content</span>
+        Long <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">Form Content</span>
       </h2>
 
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10">
-        {/* Left side - video container */}
-        <div className="relative w-full lg:w-1/2 aspect-video rounded-2xl overflow-hidden shadow-2xl group">
-          <AnimatePresence mode="wait">
+      <div className="relative max-w-7xl mx-auto">
+        <AnimatePresence mode="wait">
             <motion.div
-              key={current.videoSrc}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="w-full h-full"
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="flex flex-col lg:flex-row items-center justify-center gap-10 p-8 rounded-2xl shadow-xl border border-[#2E2E2E] bg-[#1A1A1A] transition-all duration-300 hover:shadow-[0_0_25px_0_rgba(225,162,51,0.5)]"
             >
-              <video
-                ref={videoRef}
-                key={current.videoSrc}
-                src={current.videoSrc}
-                autoPlay={isPlaying}
-                loop
-                muted={isMuted}
-                playsInline
-                className="w-full h-full object-cover rounded-2xl"
-                preload="auto"
-              />
+                {/* Left side - video container */}
+                <div className="relative w-full lg:w-1/2 aspect-video rounded-2xl overflow-hidden shadow-2xl group">
+                    <video
+                        ref={videoRef}
+                        key={current.videoSrc}
+                        src={current.videoSrc}
+                        autoPlay={isPlaying}
+                        loop
+                        muted={isMuted}
+                        playsInline
+                        className="w-full h-full object-cover rounded-2xl"
+                        preload="auto"
+                    />
+
+                    <button
+                    onClick={toggleMute}
+                    aria-label={isMuted ? "Unmute video" : "Mute video"}
+                    className="absolute top-3 right-3 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-sm transition-all duration-300 z-20"
+                    >
+                    {isMuted ? <VolumeMuteIcon className="w-5 h-5" /> : <VolumeUpIcon className="w-5 h-5" />}
+                    </button>
+
+                    <div
+                    onClick={togglePlay}
+                    className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 hover:bg-black/40 transition-all duration-300 rounded-2xl z-10 cursor-pointer"
+                    >
+                        <button
+                            aria-label={isPlaying ? "Pause video" : "Play video"}
+                            className="text-white text-5xl transform transition-transform hover:scale-110"
+                        >
+                            {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Right side - text content */}
+                <div className="w-full lg:w-1/2">
+                    <h3 className="text-3xl font-extrabold mb-4 bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
+                        {current.title}
+                    </h3>
+                    <p className="text-white/80 mb-4 leading-relaxed text-base">
+                        {current.description}
+                    </p>
+                    <div className="text-sm font-semibold text-white/80">
+                        Involvement:{" "}
+                        <span className="font-bold bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
+                        {current.involvement}
+                        </span>
+                    </div>
+                </div>
             </motion.div>
-          </AnimatePresence>
-
-          <button
-            onClick={toggleMute}
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
-            className="absolute top-3 right-3 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-sm transition-all duration-300 z-20"
-          >
-            {isMuted ? <VolumeMuteIcon className="w-5 h-5" /> : <VolumeUpIcon className="w-5 h-5" />}
-          </button>
-
-          <div
-            onClick={togglePlay}
-            className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 hover:bg-black/40 transition-all duration-300 rounded-2xl z-10 cursor-pointer"
-          >
-            <button
-              aria-label={isPlaying ? "Pause video" : "Play video"}
-              className="text-white text-5xl transform transition-transform hover:scale-110"
-            >
-              {isPlaying ? <PauseIcon /> : <PlayIcon />}
-            </button>
-          </div>
-          
-
-          <button
-            onClick={handlePrev}
-            aria-label="Previous video"
-            className="absolute top-1/2 -translate-y-1/2 left-3 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition z-20"
-          >
-            <ChevronLeftIcon className="w-6 h-6" />
-          </button>
-          <button
-            onClick={handleNext}
-            aria-label="Next video"
-            className="absolute top-1/2 -translate-y-1/2 right-3 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition z-20"
-          >
-            <ChevronRightIcon className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Right side - text content */}
-        <div className="w-full lg:w-1/2">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="p-8 rounded-2xl shadow-xl border border-[#2E2E2E] bg-[#1A1A1A] transition-all duration-300 hover:shadow-[0_0_25px_0_rgba(225,162,51,0.5)]"
-            >
-              <h3 className="text-3xl font-extrabold mb-4 bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
-                {current.title}
-              </h3>
-              <p className="text-white/80 mb-4 leading-relaxed text-base">
-                {current.description}
-              </p>
-              <div className="text-sm font-semibold text-white/80">
-                Involvement:{" "}
-                <span className="font-bold bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
-                  {current.involvement}
-                </span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        </AnimatePresence>
+        
+        {/* --- NAVIGATION BUTTONS --- */}
+        <button
+          onClick={handlePrev}
+          aria-label="Previous"
+          className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-12 bg-gray-800/50 hover:bg-gray-700/70 text-white rounded-full p-3 transition z-20 hidden lg:block"
+        >
+          <ChevronLeftIcon className="w-6 h-6" />
+        </button>
+        <button
+          onClick={handleNext}
+          aria-label="Next"
+          className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-12 bg-gray-800/50 hover:bg-gray-700/70 text-white rounded-full p-3 transition z-20 hidden lg:block"
+        >
+          <ChevronRightIcon className="w-6 h-6" />
+        </button>
       </div>
     </section>
   );
 };
 
 export default LongFormSection;
+

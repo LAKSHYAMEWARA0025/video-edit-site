@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen w-full bg-black bg-[url('/HomePageBg/homepage.jpg')] bg-center bg-cover">
+    <section className="relative min-h-screen w-full bg-black bg-[url('/HomePageBg/hom.jpg')] bg-center bg-cover opacity-0.5">
       {/* Dark overlay */}
       {/* <div className="absolute inset-0 bg-black/60 z-2"></div>
        */}

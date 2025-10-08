@@ -42,7 +42,7 @@ const Header = () => {
             <img
               src="/logo/Whitelogo.png"
               alt="Logo"
-              className="w-24 md:w-28 h-auto drop-shadow-lg"
+              className="w-64 md:w-40 h-auto drop-shadow-lg"
               onError={(e) => { e.currentTarget.src = '/logo/Whitelogo.png'; }}
             />
           </a>

@@ -1,8 +1,5 @@
 import React from "react";
 
-// --- Design Constant ---
-const ACCENT_ORANGE = "#D94E13"; // Accent color for glow effect
-
 // --- Data Structure ---
 type Creator = {
   name: string;
@@ -27,50 +24,68 @@ const creators: Creator[] = [
 ];
 
 // Duplicate for seamless infinite scrolling
-const infiniteCreators = [...creators, ...creators];
+const infiniteCreators: Creator[] = [...creators, ...creators];
+
+// --- Prop Types for CreatorCard ---
+interface CreatorCardProps {
+  creator: Creator;
+}
 
 // --- Creator Card Component ---
-const CreatorCard: React.FC<{ creator: Creator }> = ({ creator }) => {
+const CreatorCard: React.FC<CreatorCardProps> = ({ creator }) => {
   return (
-    <div
-      className={`group relative h-[280px] w-[280px] flex-shrink-0
-                overflow-hidden rounded-full shadow-xl cursor-pointer 
-                transition-transform duration-300 hover:scale-[1.05] 
-                border border-transparent hover:border-orange-500/30`}
-    >
-      {creator.image ? (
-        <img
-          src={creator.image}
-          alt={creator.name}
-          className="w-full h-full object-cover object-top transition-opacity duration-500 group-hover:opacity-30"
-          onError={(e) => { e.currentTarget.src = 'https://placehold.co/280x280/1A1A1A/FFFFFF?text=Photo'; }}
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center bg-gray-900 text-gray-300 text-6xl font-bold">
-          {creator.name.charAt(0)}
-        </div>
-      )}
-
+    // Parent container to manage hover state ('group') and scaling
+    <div className="group relative flex-shrink-0 transition-transform duration-300 hover:scale-[1.05]">
+      
+      {/* The glowing border element with expanded hover effect */}
       <div 
-        className={`absolute inset-0 bg-black/60 backdrop-blur-sm 
-                   flex flex-col items-center justify-end p-6 text-center
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full pb-10`}
-      >
-        <h3 className="text-xl font-extrabold text-white mb-1 leading-snug">
-          {creator.name}
-        </h3>
-        <p className="text-md font-semibold text-gray-300 mb-4">
-          {creator.followers}
-        </p>
-      </div>
+        className={`absolute -inset-1 rounded-full bg-gradient-to-r from-orange-600 to-amber-500 
+                   opacity-0 transition-all duration-500 ease-out 
+                   group-hover:opacity-80 group-hover:blur-md group-hover:scale-110`}
+      />
 
-      <div className="absolute inset-0 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-custom-orange" />
+      {/* The main card content, positioned relatively to sit on top of the glow */}
+      <div
+        className={`relative h-[220px] w-[220px] overflow-hidden 
+                   rounded-full shadow-xl cursor-pointer bg-gray-900`}
+      >
+        {creator.image ? (
+          <div className="w-full h-full rounded-full overflow-hidden bg-gray-900 relative z-10">
+            <img
+              src={creator.image}
+              alt={creator.name}
+              className="w-full h-full object-cover object-top transition-opacity duration-500 group-hover:opacity-30"
+              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => { 
+                e.currentTarget.src = 'https://placehold.co/220x220/1A1A1A/FFFFFF?text=Photo'; 
+              }}
+            />
+          </div>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gray-900 text-gray-300 text-5xl font-bold">
+            {creator.name.charAt(0)}
+          </div>
+        )}
+
+        {/* Overlay div */}
+        <div 
+          className={`absolute inset-0 bg-black/60 backdrop-blur-sm 
+                     flex flex-col items-center justify-end p-6 text-center
+                     opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full pb-8 z-20`}
+        >
+          <h3 className="text-xl font-extrabold text-white mb-1 leading-snug">
+            {creator.name}
+          </h3>
+          <p className="text-md font-semibold text-gray-300 mb-4">
+            {creator.followers}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
 
 // --- Main Creators Section ---
-export default function CreatorsSection() {
+export default function CreatorsSection(): React.JSX.Element {
   return (
     <section className="bg-[#000000] text-white py-24 overflow-hidden relative">
       <style>
@@ -81,9 +96,6 @@ export default function CreatorsSection() {
           }
           .animate-scroll {
             animation: scroll 80s linear infinite; 
-          }
-          .shadow-custom-orange {
-            box-shadow: 0 0 15px ${ACCENT_ORANGE}, inset 0 0 5px ${ACCENT_ORANGE};
           }
         `}
       </style>
@@ -100,7 +112,7 @@ export default function CreatorsSection() {
         className="w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_64px,_black_calc(100%-64px),transparent_100%)]"
       >
         <div className="flex gap-8 py-8 animate-scroll">
-          {infiniteCreators.map((creator, idx) => (
+          {infiniteCreators.map((creator: Creator, idx: number) => (
             <CreatorCard key={idx} creator={creator} /> 
           ))}
         </div>

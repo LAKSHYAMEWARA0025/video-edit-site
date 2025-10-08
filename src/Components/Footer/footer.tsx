@@ -137,9 +137,9 @@ const Footer: React.FC = () => {
 
       <div className="relative z-10 pt-10 flex flex-col md:flex-row justify-between items-center md:items-end max-w-7xl mx-auto gap-12">
         <div className="flex flex-col items-center md:items-start gap-2 flex-shrink-0">
-          <img src="/logo/Whitelogo.png" alt="Logo" className="w-24 h-auto drop-shadow-lg" />
+          {/* <img src="/logo/Whitelogo.png" alt="Logo" className="w-24 h-auto drop-shadow-lg" /> */}
           <span className="text-2xl sm:text-3xl font-bold tracking-wider text-white">The Final Cut</span>
-          <p className="text-sm text-gray-500 mt-1">A Personal Branding Studio.</p>
+          <p className="text-sm text-gray-500 mt-1">A Personal Branding Agency.</p>
         </div>
 
         <div className="text-center md:text-right w-full md:w-auto">

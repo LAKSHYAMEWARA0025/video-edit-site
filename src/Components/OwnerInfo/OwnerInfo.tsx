@@ -16,7 +16,7 @@ const OwnerInfo: React.FC = () => {
   const OWNER_NAME = "Vijay Chaudhary";
 
   return (
-    <section id="about" className="relative overflow-hidden bg-[#000000] py-20 px-6 sm:px-8">
+    <section id="about" className="relative overflow-hidden bg-[#000000] py-20 px-6 sm:px-8 font-primary">
       
       {/* Animated background gradient blobs */}
       <motion.div
@@ -31,84 +31,87 @@ const OwnerInfo: React.FC = () => {
       />
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
+      <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
         
         {/* Title */}
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-12 drop-shadow-md font-secondary">
           We Did it, <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">You can too</span>
         </h2>
 
-        {/* Text Content */}
-        <div className="space-y-6 text-base sm:text-lg leading-relaxed text-gray-300 font-light px-2">
-          <p>
-            Today, most early-stage businesses can be built using AI. But what
-            they often lack is distribution—something AI alone cannot solve.
-            That’s where we come in.
-          </p>
-          <p>
-            We’ve worked with several individual creators across India and even
-            a few in London, helping them grow their online presence. This
-            online presence doesn’t just build credibility, it also creates a
-            strong distribution channel that directly fuels their business
-            growth.
-          </p>
-          <p>
-            Once you have distribution, running an online business becomes far
-            easier. With greater reach and trust, your business can scale much
-            faster without any cost.
-          </p>
-          <p>
-            After spending years creating content that resonates with millions,
-            I've realized one thing:{" "}
-            <span className="font-semibold tracking-wide bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
-              attention is the new currency.
-            </span>
-          </p>
-          <p>
-            With 100k+ views on YouTube and experience crafting 500+ videos, I
-            help brands stand out through powerful storytelling and content
-            strategy.
-          </p>
-          <p className="italic font-medium mt-8 text-orange-400/80">
-            Every scroll, every click, every view Matters!!
-          </p>
-        </div>
+        {/* --- NEW SECTION WITH GREY BACKGROUND --- */}
+        <div className="bg-[#1A1A1A]/70 backdrop-blur-sm rounded-2xl p-8 sm:p-12 mt-16 text-left border border-gray-800">
+            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+                
+                {/* Left Side: Text Content */}
+                <div className="lg:w-2/3 space-y-6 text-base sm:text-lg leading-relaxed text-gray-300 font-light">
+                    <p>
+                    Today, most early-stage businesses can be built using AI. But what
+                    they often lack is distribution—something AI alone cannot solve.
+                    That’s where we come in.
+                    </p>
+                    <p>
+                    We’ve worked with several individual creators across India and even
+                    a few in London, helping them grow their online presence. This
+                    online presence doesn’t just build credibility, it also creates a
+                    strong distribution channel that directly fuels their business
+                    growth.
+                    </p>
+                    <p>
+                    Once you have distribution, running an online business becomes far
+                    easier. With greater reach and trust, your business can scale much
+                    faster without any cost.
+                    </p>
+                    <p>
+                    After spending years creating content that resonates with millions,
+                    I've realized one thing:{" "}
+                    <span className="font-semibold tracking-wide bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
+                        attention is the new currency.
+                    </span>
+                    </p>
+                    <p className="italic font-medium mt-8 text-orange-400/80">
+                    Every scroll, every click, every view Matters!!
+                    </p>
+                </div>
 
-        {/* Owner Info Card */}
-        <motion.div
-          className="mt-16 inline-block bg-[#1A1A1A] rounded-xl p-8 shadow-2xl transition-all duration-500 border border-transparent hover:border-orange-500/30"
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-        >
-          <div className="flex flex-col items-center gap-4">
-            <img
-              src="/owner/owner.jpg"
-              alt={OWNER_NAME}
-              className="w-32 h-32 rounded-full object-cover border-4 border-orange-500/70 shadow-lg grayscale hover:grayscale-0 transition duration-500"
-            />
-            <h3 className="text-2xl sm:text-3xl font-bold text-white">
-              {OWNER_NAME}
-            </h3>
-            
-            {/* YouTube Link */}
-            <a
-              href={OWNER_YOUTUBE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-orange-400 hover:text-orange-300 transition text-lg font-medium"
-              aria-label={`Follow ${OWNER_NAME} on YouTube`}
-            >
-              <YouTubeIcon className="text-2xl" />
-              {OWNER_USERNAME}
-            </a>
-          </div>
-        </motion.div>
+                {/* Right Side: Owner Info Card */}
+                <div className="lg:w-1/3 w-full flex justify-center mt-8 lg:mt-0">
+                    <motion.div
+                        className="w-full max-w-xs bg-[#121212] rounded-xl p-8 shadow-2xl transition-all duration-500 border border-gray-700/50 hover:border-orange-500/30"
+                        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
+                    >
+                        <div className="flex flex-col items-center gap-4">
+                        <img
+                            src="/owner/owner.jpg"
+                            alt={OWNER_NAME}
+                            className="w-32 h-32 rounded-full object-cover border-4 border-orange-500/70 shadow-lg grayscale hover:grayscale-0 transition duration-500"
+                        />
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                            {OWNER_NAME}
+                        </h3>
+                        
+                        <a
+                            href={OWNER_YOUTUBE}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-orange-400 hover:text-orange-300 transition text-lg font-medium"
+                            aria-label={`Follow ${OWNER_NAME} on YouTube`}
+                        >
+                            <YouTubeIcon className="text-2xl" />
+                            {OWNER_USERNAME}
+                        </a>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+        </div>
       </div>
     </section>
   );
 };
 
 export default OwnerInfo;
+
