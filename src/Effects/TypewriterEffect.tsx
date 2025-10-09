@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 interface Word {
   text: string;
@@ -18,7 +18,7 @@ const TypewriterEffect: React.FC<TypewriterEffectSmoothProps> = ({ words }) => {
     setIsTyping(true);
   }, []);
 
-  const containerVariants = {
+  const containerVariants :Variants= {
     visible: {
       transition: {
         // Stagger between words (0.15s gap between each word's animation start)
@@ -28,7 +28,7 @@ const TypewriterEffect: React.FC<TypewriterEffectSmoothProps> = ({ words }) => {
   };
 
   // Variants applied to the entire word block
-  const wordVariants = {
+  const wordVariants :Variants= {
     hidden: { 
         opacity: 0,
         // The clipPath reveals the word from left (0%) to right (100%)
