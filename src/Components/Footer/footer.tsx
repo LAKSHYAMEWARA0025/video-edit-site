@@ -93,13 +93,13 @@ const Footer: React.FC = () => {
     { text: "businesses" },
     { text: "build", className: "text-white" },
     { text: "their", className: "text-white" },
-    { text: "profitable", className: "text-white" },
+    // { text: "profitable", className: "text-white" },
     { text: "personal", className: "text-white" },
     { text: "brands", className: "text-white" },
-    { text: "that", className: "text-white" },
-    { text: "actually", className: "text-white" },
-    { text: "creates", className: "bg-gradient-to-r from-gray-200 to-orange-500 bg-clip-text text-transparent" },
-    { text: "distribution.", className: "text-white" },
+    // { text: "that", className: "text-white" },
+    // { text: "actually", className: "text-white" },
+    { text: "organically.", className: "bg-gradient-to-r from-gray-200 to-orange-500 bg-clip-text text-transparent" },
+    // { text: "distribution.", className: "text-white" },
   ];
 
   return (
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
           {inView ? (
             <TypewriterEffectSmooth words={heroWords} />
           ) : (
-            <p className="opacity-0">We help startups and businesses build their profitable personal brands that actually creates distribution.</p>
+            <p className="opacity-0">We help startups and businesses build their personal brands organically.</p>
           )}
         </div>
 

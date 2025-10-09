@@ -2,7 +2,7 @@ import React from "react";
 
 // Updated company data to point to local logo files in the `/Trust/` folder
 const companies = [
-  { name: "Yes Securities", logo: "/Trust/YesSecurities.png" },
+  { name: "Yes Securities", logo: "/Trust/YesSecurites.png" },
   { name: "Samco Securities", logo: "/Trust/Samco.png" },
   { name: "Lvana", logo: "/Trust/lvana.png" },
   { name: "Fome", logo: "/Trust/Fome.png" },
@@ -47,7 +47,7 @@ const TrustedBy: React.FC = () => {
               <img
                 src={company.logo}
                 alt={company.name}
-                className="h-16 sm:h-20 w-auto object-contain transition-all duration-300 filter grayscale brightness-0 invert opacity-70 group-hover:opacity-100 group-hover:scale-115"
+                className="h-28 sm:h-20 w-auto object-contain transition-all duration-300 filter grayscale brightness-0 invert opacity-70 group-hover:opacity-100 group-hover:scale-115"
                 // Fallback in case a logo fails to load
                 onError={(e) => { (e.currentTarget as HTMLImageElement).src = `https://placehold.co/240x80/000000/FFFFFF?text=${company.name}`; }}
               />
