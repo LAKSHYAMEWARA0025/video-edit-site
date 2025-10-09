@@ -41,31 +41,31 @@ const ChevronRightIcon = (props: SVGProps<SVGSVGElement>) => (
 
 const longFormContent = [
   {
-    title: "Brand Strategy Design",
-    involvement: "1-2 hours",
+    title: "A Story of My Placement  Finally Placed",
+    // involvement: "1-2 hours",
     description:
-      "Map your entire content ecosystem in one powerful session. We'll craft your unique angle, design your hooks, and build your content strategy. Get the first 1-3 month brand strategy ideated in week 1. We'll nail down brand assets and start content production from week 2.",
+      " This is a documentary-style video (45k views) that blends storytelling and music, presenting the journey from problem to solution like a docuseries.",
     videoSrc: "/videos/long1.mp4",
   },
   {
-    title: "Scaling Content Sessions",
-    involvement: "4-5 hours",
+    title: "How I handled Family Pressure during JEE Preparation",
+    // involvement: "4-5 hours",
     description:
-      "We run 1-2 recording sessions monthly (1-1.5 hours each). We transform these into 40-50 pieces of content across videos, animations, carousels and stories. This ensures a consistent, high-quality flow across all platforms.",
+      " This is a cleanly edited video where the creator shares his experience, keeping the audience engaged with the story.",
     videoSrc: "/videos/long2.mp4",
   },
   {
-    title: "Watch Your Brand Scale",
-    involvement: "0 hours",
+    title: "Not Enjoying Development",
+    // involvement: "0 hours",
     description:
-      "While you’re closing deals and running your business, we’re turning your expertise into a content empire that fills leads for your product/service. Your brand works 24/7 so you don’t have to.",
+      " This is a tutorial-style video focused on clean editing and high-quality audio, featuring both screen sharing and the creator’s face simultaneously.",
     videoSrc: "/videos/long3.mp4",
   },
   {
-    title: "Monetization Workshop",
-    involvement: "2 hours",
+    title: "Intro for a channel ",
+    // involvement: "2 hours",
     description:
-      "A dedicated session to refine your funnels, optimize ad placement, and integrate e-commerce solutions directly into your content. We ensure every view has a clear path to conversion for maximum ROI.",
+      " This is an intro/trailer video that highlights the teacher’s profile and the type of content she creates.",
     videoSrc: "/videos/long4.mp4",
   },
 ];
@@ -170,10 +170,10 @@ const LongFormSection = () => {
                         {current.description}
                     </p>
                     <div className="text-sm font-semibold text-white/80">
-                        Involvement:{" "}
-                        <span className="font-bold bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
+                        {/* Involvement:{" "} */}
+                        {/* <span className="font-bold bg-gradient-to-r from-[#EFEFEF] to-[#A75A2B] bg-clip-text text-transparent">
                         {current.involvement}
-                        </span>
+                        </span> */}
                     </div>
                 </div>
             </motion.div>

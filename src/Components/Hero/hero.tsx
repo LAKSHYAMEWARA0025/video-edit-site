@@ -37,9 +37,13 @@ const Hero: React.FC = () => {
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 py-20 md:py-32 gap-8">
         {/* Headline */}
-        <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white max-w-5xl tracking-tight" variants={itemVariants} initial="hidden" animate="visible">
-          We help <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">startups and businesses</span> build their profitable <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">personal brands</span> that actually creates distribution.
-        </motion.h1>
+        {/* <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white max-w-5xl tracking-tight" variants={itemVariants} initial="hidden" animate="visible">
+          We help <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">startups and businesses  </span>build their <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">personal brand</span> organically.
+        </motion.h1> */}
+        <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white max-w-5xl tracking-tight leading-tight" variants={itemVariants} initial="hidden" animate="visible">
+    We help <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">startups and businesses</span><br/>
+    build their <span className="bg-gradient-to-r from-[#E0E0E0] to-[#D94E13] bg-clip-text text-transparent">personal brand</span> organically.
+  </motion.h1>
 
         {/* Subtext */}
         <motion.p className="text-gray-300 text-lg sm:text-xl max-w-3xl" variants={itemVariants}>

@@ -1,22 +1,25 @@
 import React from "react";
 
+// Updated company data to point to local logo files in the `/Trust/` folder
 const companies = [
-  { name: "Yes Securities", logo: "https://logo.clearbit.com/yesinvest.in" },
-  { name: "Samco Securities", logo: "https://logo.clearbit.com/samco.in" },
-  { name: "Lvana", logo: "https://logo.clearbit.com/ivanajewels.com" },
-  { name: "Cello", logo: "https://logo.clearbit.com/celloworld.com" },
-  { name: "Air India", logo: "https://logo.clearbit.com/airindia.com" },
-  { name: "Dhiwise", logo: "https://logo.clearbit.com/dhiwise.com" },
-  { name: "Scaler", logo: "https://logo.clearbit.com/scaler.com" },
-  { name: "Vedantu", logo: "https://logo.clearbit.com/vedantu.com" },
-  { name: "Semrush", logo: "https://logo.clearbit.com/semrush.com" },
-  { name: "Markit Up", logo: "https://logo.clearbit.com/markitup.in" },
-  { name: "Vrikshit Foundation", logo: "https://logo.clearbit.com/vrikshitfoundation.org" },
+  { name: "Yes Securities", logo: "/Trust/YesSecurities.png" },
+  { name: "Samco Securities", logo: "/Trust/Samco.png" },
+  { name: "Lvana", logo: "/Trust/lvana.png" },
+  { name: "Fome", logo: "/Trust/Fome.png" },
+  { name: "Air India", logo: "/Trust/Airindia.png" },
+  { name: "Dhiwise", logo: "/Trust/Dhiwise.png" },
+  { name: "Scaler", logo: "/Trust/Scaler.png" },
+  { name: "Vedantu", logo: "/Trust/vedantu.png" },
+  { name: "Semrush", logo: "/Trust/semrush.png" },
+  { name: "Tuf", logo: "/Trust/tuf.png" },
+  { name: "Vrikshit Foundation", logo: "/Trust/Varkshit.png" },
+  { name: "Unacademy", logo: "/Trust/Unacademy.png" },
 ];
 
 const TrustedBy: React.FC = () => {
+  // Duplicate the array for a seamless infinite scroll
   const logos = [...companies, ...companies];
-  const animationDuration = 45;
+  const animationDuration = 45; // seconds
 
   return (
     <section className="bg-[#000000] py-20 text-white relative overflow-hidden font-primary">
@@ -39,11 +42,15 @@ const TrustedBy: React.FC = () => {
           {logos.map((company, idx) => (
             <div
               key={idx}
-              className="flex-shrink-0 flex items-center justify-center min-w-[200px] sm:min-w-[280px] h-24"
+              className="flex-shrink-0 flex items-center justify-center min-w-[180px] sm:min-w-[240px] h-28 group"
             >
-              <span className="text-2xl sm:text-3xl font-bold text-white text-center transition-all duration-300 opacity-70 hover:opacity-100 hover:scale-105 tracking-wide">
-                {company.name}
-              </span>
+              <img
+                src={company.logo}
+                alt={company.name}
+                className="h-16 sm:h-20 w-auto object-contain transition-all duration-300 filter grayscale brightness-0 invert opacity-70 group-hover:opacity-100 group-hover:scale-115"
+                // Fallback in case a logo fails to load
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = `https://placehold.co/240x80/000000/FFFFFF?text=${company.name}`; }}
+              />
             </div>
           ))}
         </div>

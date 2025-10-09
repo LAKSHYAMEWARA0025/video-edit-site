@@ -13,7 +13,7 @@ const YouTubeIcon = (props: SVGProps<SVGSVGElement>) => (
 const OwnerInfo: React.FC = () => {
   const OWNER_YOUTUBE = "https://www.youtube.com/@itsvijaychoudhary/featured";
   const OWNER_USERNAME = "@itsvijaychoudhary";
-  const OWNER_NAME = "Vijay Chaudhary";
+  const OWNER_NAME = "Vijay Choudhary";
 
   return (
     <section id="about" className="relative overflow-hidden bg-[#000000] py-20 px-6 sm:px-8 font-primary">
