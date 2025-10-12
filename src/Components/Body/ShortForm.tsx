@@ -147,7 +147,6 @@ const VideoPlayer = ({ src }: { src: string }) => {
 const videos = [
   { src: "/videos/short1.mp4" },
   { src: "/videos/short2.mp4" },
-  { src: "/videos/short3.mp4" },
   { src: "/videos/short4.mp4" },
   { src: "/videos/short6.mp4" },
 ];
