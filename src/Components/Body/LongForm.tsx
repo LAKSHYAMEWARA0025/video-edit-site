@@ -40,34 +40,36 @@ const ChevronRightIcon = (props: SVGProps<SVGSVGElement>) => (
 
 
 const longFormContent = [
-  {
-    title: "A Story of My Placement  Finally Placed",
-    // involvement: "1-2 hours",
-    description:
-      " This is a documentary-style video (45k views) that blends storytelling and music, presenting the journey from problem to solution like a docuseries.",
-    videoSrc: "/videos/long1.mp4",
-  },
+  
   {
     title: "How I handled Family Pressure during JEE Preparation",
     // involvement: "4-5 hours",
     description:
       " This is a cleanly edited video where the creator shares his experience, keeping the audience engaged with the story.",
-    videoSrc: "/videos/long2.mp4",
-  },
-  {
-    title: "Not Enjoying Development",
-    // involvement: "0 hours",
-    description:
-      " This is a tutorial-style video focused on clean editing and high-quality audio, featuring both screen sharing and the creator’s face simultaneously.",
-    videoSrc: "/videos/long3.mp4",
+    videoSrc: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760275298/videoplayback_1_kcqas6.mp4",
   },
   {
     title: "Intro for a channel ",
     // involvement: "2 hours",
     description:
       " This is an intro/trailer video that highlights the teacher’s profile and the type of content she creates.",
-    videoSrc: "/videos/long4.mp4",
+    videoSrc: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273112/long4_hpglcu.mp4",
   },
+  {
+    title: "A Story of My Placement  Finally Placed",
+    // involvement: "1-2 hours",
+    description:
+      " This is a documentary-style video (45k views) that blends storytelling and music, presenting the journey from problem to solution like a docuseries.",
+    videoSrc: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273206/long1_coei4s.mp4",
+  },
+  {
+    title: "Not Enjoying Development",
+    // involvement: "0 hours",
+    description:
+      " This is a tutorial-style video focused on clean editing and high-quality audio, featuring both screen sharing and the creator’s face simultaneously.",
+    videoSrc: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273232/long3_bsge2x.mp4",
+  },
+  
 ];
 
 const LongFormSection = () => {

@@ -145,10 +145,11 @@ const VideoPlayer = ({ src }: { src: string }) => {
    ShortFormSection - grid of videos
    ------------------- */
 const videos = [
-  { src: "/videos/short1.mp4" },
-  { src: "/videos/short2.mp4" },
-  { src: "/videos/short4.mp4" },
-  { src: "/videos/short6.mp4" },
+  { src: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273129/short1_b3drzw.mp4" },
+  { src: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273117/short2_yxndjg.mp4" },
+  { src: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273133/short4_abfdzu.mp4" },
+  { src: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273147/short5_yp3fat.mp4" },
+  { src: "https://res.cloudinary.com/dsol6ftem/video/upload/v1760273139/short6_bgvgmt.mp4" },
 ];
 
 const ShortFormSection = () => {
